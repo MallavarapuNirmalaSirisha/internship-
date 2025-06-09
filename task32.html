@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Number Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+        }
+
+        table td:first-child {
+            width: 100px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="number"],
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            display: block;
+            width: 120px;
+            padding: 10px;
+            margin: 20px auto 0;
+            background-color: #e0e0e0;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Prime Number Generator</h2>
+        <table>
+            <tr>
+                <td>Start</td>
+                <td><input type="number" id="startNum" value="1"></td>
+            </tr>
+            <tr>
+                <td>End</td>
+                <td><input type="number" id="endNum" value="100"></td>
+            </tr>
+            <tr>
+                <td>Prime Number</td>
+                <td><textarea id="primeNumbers" readonly></textarea></td>
+            </tr>
+        </table>
+        <button onclick="generatePrimes()">Generate</button>
+    </div>
+
+    <script>
+        function isPrime(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        function generatePrimes() {
+            const start = parseInt(document.getElementById('startNum').value);
+            const end = parseInt(document.getElementById('endNum').value);
+            const primeNumbersTextarea = document.getElementById('primeNumbers');
+            let primes = [];
+
+            if (isNaN(start) || isNaN(end) || start < 0 || end < 0 || start > end) {
+                alert("Please enter valid positive numbers where Start is less than or equal to End.");
+                primeNumbersTextarea.value = "";
+                return;
+            }
+
+            for (let i = start; i <= end; i++) {
+                if (isPrime(i)) {
+                    primes.push(i);
+                }
+            }
+            primeNumbersTextarea.value = primes.join(', ');
+        }
+    </script>
+</body>
+</html>
