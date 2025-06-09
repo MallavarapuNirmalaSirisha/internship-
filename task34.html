@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AGE CALCULATOR</h1>
+        <div class="input-container">
+            <input type="date" id="birthdateInput" placeholder="MM/DD/YYYY">
+            <button onclick="calculateAge()">Calculator</button>
+        </div>
+        <div class="result-container">
+            <div class="result-box">
+                <span id="years">00</span>
+                <span>YEAR</span>
+            </div>
+            <div class="result-box">
+                <span id="months">00</span>
+                <span>MONTH</span>
+            </div>
+            <div class="result-box">
+                <span id="days">00</span>
+                <span>DAY</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const birthdateInput = document.getElementById('birthdateInput').value;
+            const birthDate = new Date(birthdateInput);
+
+            if (isNaN(birthDate.getTime()) || birthDate > new Date()) {
+                alert("Please enter a valid birth date in the past.");
+                document.getElementById('years').textContent = '00';
+                document.getElementById('months').textContent = '00';
+                document.getElementById('days').textContent = '00';
+                return;
+            }
+
+            const today = new Date();
+
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            document.getElementById('years').textContent = years.toString().padStart(2, '0');
+            document.getElementById('months').textContent = months.toString().padStart(2, '0');
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        }
+    </script>
+</body>
+</html>
