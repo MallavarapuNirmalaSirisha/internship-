@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Number Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .input-group label {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .input-group input[type="text"] {
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            outline: none;
+            width: 200px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .input-group input[type="text"]:focus {
+            border-color: #66afe9;
+            box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            color: #333;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #d0d0d0;
+            border-color: #bbb;
+        }
+
+        button:active {
+            background-color: #c0c0c0;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Mobile Number Validation using JavaScript</h1>
+
+    <div class="input-group">
+        <label for="mobileNumber">Enter Mobile Number</label>
+        <input type="text" id="mobileNumber" placeholder="Enter 10 Digit Mobile Num" maxlength="10">
+    </div>
+
+    <button onclick="validateMobileNumber()">Validate</button>
+
+    <script>
+        function validateMobileNumber() {
+            const mobileInput = document.getElementById('mobileNumber');
+            const mobileNumber = mobileInput.value.trim();
+
+            const regex = /^\d{10}$/; // Regular expression for exactly 10 digits
+
+            if (regex.test(mobileNumber)) {
+                alert("Mobile number is valid!");
+            } else {
+                alert("Invalid mobile number. Please enter exactly 10 digits.");
+            }
+        }
+    </script>
+</body>
+</html>
