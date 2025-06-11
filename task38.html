@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+  .form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+  }
+  .radio-group label {
+    display: inline-block;
+    margin-right: 15px;
+  }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+  <form id="registrationForm">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" placeholder="First Name">
+      <div class="error-message" id="firstNameError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" placeholder="Last Name">
+      <div class="error-message" id="lastNameError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-Mail</label>
+      <input type="email" id="email" name="email" placeholder="E-Mail Address">
+      <div class="error-message" id="emailError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone #</label>
+      <input type="tel" id="phone" name="phone" placeholder="(845)555-1212">
+      <div class="error-message" id="phoneError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" placeholder="Address">
+      <div class="error-message" id="addressError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" placeholder="city">
+      <div class="error-message" id="cityError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="state">State</label>
+      <select id="state" name="state">
+        <option value="">Please select your state</option>
+        <option value="NY">New York</option>
+        <option value="CA">California</option>
+        <option value="TX">Texas</option>
+      </select>
+      <div class="error-message" id="stateError"></div>
+    </div>
+
+    <div class="form-group">
+      <label>Do you have hosting?</label>
+      <div class="radio-group">
+        <input type="radio" id="hostingYes" name="hosting" value="yes">
+        <label for="hostingYes">Yes</label>
+        <input type="radio" id="hostingNo" name="hosting" value="no">
+        <label for="hostingNo">No</label>
+      </div>
+      <div class="error-message" id="hostingError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="projectDescription">Project Description</label>
+      <textarea id="projectDescription" name="projectDescription" rows="4" placeholder="Project Description"></textarea>
+      <div class="error-message" id="projectDescriptionError"></div>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    validateForm();
+  });
+
+  function validateForm() {
+    let isValid = true;
+
+    // Clear previous errors
+    document.querySelectorAll('.error-message').forEach(function(element) {
+      element.innerText = '';
+    });
+    document.querySelectorAll('input, select, textarea').forEach(function(element) {
+      element.style.borderColor = '#ddd';
+    });
+
+    // Validate First Name
+    const firstName = document.getElementById('firstName');
+    if (firstName.value.trim() === '') {
+      document.getElementById('firstNameError').innerText = 'Please supply your first name';
+      firstName.style.borderColor = 'red';
+      isValid = false;
+    }
+
+    // Validate Last Name
+    const lastName = document.getElementById('lastName');
+    if (lastName.value.trim() === '') {
+      document.getElementById('lastNameError').innerText = 'Please supply your last name';
+      lastName.style.borderColor = 'red';
+      isValid = false;
+    }
+
+    // Validate Email
+    const email = document.getElementById('email');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email.value.trim() === '') {
+      document.getElementById('emailError').innerText = 'Please supply your email address';
+      email.style.borderColor = 'red';
+      isValid = false;
+    } else if (!emailPattern.test(email.value.trim())) {
+      document.getElementById('emailError').innerText = 'Please enter a valid email address';
+      email.style.borderColor = 'red';
+      isValid = false;
+    }
+
+    // Validate Phone Number
+    const phone = document.getElementById('phone');
+    // A simple regex for the phone format (845)555-1212
+    const phonePattern = /^\(\d{3}\)\d{3}-\d{4}$/;
+    if (phone.value.trim() === '') {
+      document.getElementById('phoneError').innerText = 'Please supply your phone number';
+      phone.style.borderColor = 'red';
+      isValid = false;
+    } else if (!phonePattern.test(phone.value.trim())) {
+      document.getElementById('phoneError').innerText = 'Please enter a valid phone number (e.g., (845)555-1212)';
+      phone.style.borderColor = 'red';
+      isValid = false;
+    }
+
+    // Validate Address
+    const address = document.getElementById('address');
+    if (address.value.trim() === '') {
+      document.getElementById('addressError').innerText = 'Please supply your street address';
+      address.style.borderColor = 'red';
+      isValid = false;
+    }
+
+    // Validate City
+    const city = document.getElementById('city');
+    if (city.value.trim() === '') {
+      document.getElementById('cityError').innerText = 'Please supply your city';
+      city.style.borderColor = 'red';
+      isValid = false;
+    }
+
+    // Validate State
+    const state = document.getElementById('state');
+    if (state.value === '') {
+      document.getElementById('stateError').innerText = 'Please select your state';
+      state.style.borderColor = 'red';
+      isValid = false;
+    }
+
+    // Validate Hosting (radio buttons)
+    const hostingYes = document.getElementById('hostingYes');
+    const hostingNo = document.getElementById('hostingNo');
+    if (!hostingYes.checked && !hostingNo.checked) {
+      document.getElementById('hostingError').innerText = 'Please select if you have hosting';
+      isValid = false;
+    }
+
+    // Validate Project Description
+    const projectDescription = document.getElementById('projectDescription');
+    if (projectDescription.value.trim() === '') {
+      document.getElementById('projectDescriptionError').innerText = 'Please enter a project description';
+      projectDescription.style.borderColor = 'red';
+      isValid = false;
+    }
+
+    if (isValid) {
+      alert('Form submitted successfully!');
+      // You would typically send the form data to a server here
+    }
+  }
+</script>
+
+</body>
+</html>
