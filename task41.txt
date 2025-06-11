@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Timer</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #e0f2f7;
+    margin: 0;
+  }
+  h1 {
+    font-family: serif;
+    font-size: 3em;
+    color: #4a6c82;
+    margin-bottom: 20px;
+  }
+  #display {
+    font-size: 5em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+  }
+  button {
+    padding: 15px 30px;
+    margin: 0 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #startButton {
+    background-color: #81c784;
+    color: white;
+  }
+  #startButton:hover {
+    background-color: #66bb6a;
+  }
+  #stopButton {
+    background-color: #ef5350;
+    color: white;
+  }
+  #stopButton:hover {
+    background-color: #e53935;
+  }
+  #resetButton {
+    background-color: #c8e6c9;
+    color: #333;
+  }
+  #resetButton:hover {
+    background-color: #a5d6a7;
+  }
+</style>
+</head>
+<body>
+
+  <h1>TIMER</h1>
+  <div id="display">25 : 00</div>
+
+  <div>
+    <button id="startButton" onclick="startTimer()">START</button>
+    <button id="stopButton" onclick="stopTimer()">STOP</button>
+    <button id="resetButton" onclick="resetTimer()">RESET</button>
+  </div>
+
+<script>
+let timer;
+let timeLeft = 25 * 60; // 25 minutes in seconds
+let isRunning = false;
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${String(minutes).padStart(2, '0')} : ${String(remainingSeconds).padStart(2, '0')}`;
+}
+
+function updateDisplay() {
+  document.getElementById('display').innerText = formatTime(timeLeft);
+}
+
+function startTimer() {
+  if (!isRunning && timeLeft > 0) {
+    isRunning = true;
+    timer = setInterval(() => {
+      timeLeft--;
+      updateDisplay();
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        isRunning = false;
+        alert('Time’s up!');
+      }
+    }, 1000);
+  }
+}
+
+function stopTimer() {
+  clearInterval(timer);
+  isRunning = false;
+}
+
+function resetTimer() {
+  stopTimer();
+  timeLeft = 25 * 60;
+  updateDisplay();
+}
+
+updateDisplay();
+</script>
+
+</body>
+</html>
