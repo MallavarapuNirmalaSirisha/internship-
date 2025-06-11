@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Weather App</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #A2E1C9; /* A light green color similar to the image */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding-top: 50px;
+    color: #333;
+  }
+  .weather-app-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: white; /* Based on the perceived color in the image */
+    margin-bottom: 50px;
+  }
+  .weather-info {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    width: 80%;
+    max-width: 800px;
+    justify-content: flex-start;
+  }
+  .current-weather {
+    text-align: left;
+    margin-right: 50px;
+  }
+  .temperature {
+    font-size: 5em;
+    font-weight: bold;
+    color: #4CAF50; /* A darker green for the temperature */
+    background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent background */
+    padding: 5px 15px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  .city-time-condition {
+    font-size: 1.5em;
+    line-height: 1.2;
+    margin-top: 10px;
+    color: #555;
+    background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent background */
+    padding: 5px 15px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  .search-section {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    max-width: 800px;
+    justify-content: flex-end;
+  }
+  .search-input {
+    border: none;
+    border-bottom: 2px solid #fff; /* White underline */
+    background: transparent;
+    font-size: 1.2em;
+    padding: 5px 0;
+    outline: none;
+    color: #333;
+    width: 200px; /* Adjust as needed */
+    text-align: center;
+  }
+  .search-input::placeholder {
+    color: #777;
+  }
+  .search-button {
+    background-color: white;
+    border: 2px solid #333; /* Darker border for the button */
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-left: 20px;
+    outline: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .search-button:hover {
+    background-color: #333;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+  <div class="weather-app-title">Weather App</div>
+
+  <div class="weather-info">
+    <div class="current-weather">
+      <div class="temperature">20</div>
+      <div class="city-time-condition">
+        Bhopal<br>
+        12:15 Monday<br>
+        mist
+      </div>
+    </div>
+  </div>
+
+  <div class="search-section">
+    <input type="text" id="citySearch" class="search-input" placeholder="Allahabad">
+    <button class="search-button" onclick="searchWeather()">Search Button</button>
+  </div>
+
+<script>
+function searchWeather() {
+  const city = document.getElementById('citySearch').value;
+  if (city) {
+    alert('Searching for weather in: ' + city + ' (Note: This is a static demo. Real weather data requires an API.)');
+    // In a real app, you would call a weather API here
+  } else {
+    alert('Please enter a city name.');
+  }
+}
+</script>
+
+</body>
+</html>
