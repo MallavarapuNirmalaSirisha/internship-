@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Alphabetical Order String</title>
+</head>
+<body>
+
+<script>
+function alphabeticalOrder(str) {
+  return str.split('').sort().join('');
+}
+
+let exampleString = 'webmaster';
+let output = alphabeticalOrder(exampleString);
+document.write("Original String: " + exampleString + "<br>");
+document.write("String in Alphabetical Order: " + output);
+</script>
+
+</body>
+</html>
