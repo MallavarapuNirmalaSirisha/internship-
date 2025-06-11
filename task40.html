@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Save and Load Data</title>
+</head>
+<body>
+
+  <label for="nameInput">Name:</label>
+  <input type="text" id="nameInput"><br><br>
+
+  <label for="ageInput">Age:</label>
+  <input type="text" id="ageInput"><br><br>
+
+  <button onclick="saveData()">Save</button>
+  <button onclick="loadData()">Load</button>
+
+<script>
+function saveData() {
+  const name = document.getElementById('nameInput').value;
+  const age = document.getElementById('ageInput').value;
+  localStorage.setItem('savedName', name);
+  localStorage.setItem('savedAge', age);
+  alert('Data saved!');
+}
+
+function loadData() {
+  const name = localStorage.getItem('savedName');
+  const age = localStorage.getItem('savedAge');
+  if (name) {
+    document.getElementById('nameInput').value = name;
+  }
+  if (age) {
+    document.getElementById('ageInput').value = age;
+  }
+  alert('Data loaded!');
+}
+</script>
+
+</body>
+</html>
